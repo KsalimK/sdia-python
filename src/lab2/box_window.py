@@ -1,6 +1,11 @@
 from lab2.utils import get_random_number_generator
 
 
+class Myclass(object):
+    def __init__(self, args):
+        self.arg = arg
+
+
 class BoxWindow:
     """[summary]
     """
@@ -11,6 +16,7 @@ class BoxWindow:
         Args:
             args ([type]): [description]
         """
+        self.bounds = numpy.array(args)
         self.bounds = None
 
     def __repr__(self):
@@ -19,10 +25,11 @@ class BoxWindow:
         Returns:
             [type]: [description]
         """
-        return ""
+        return " BoxWindow(" + +")"
 
     def __len__(self):
-        return
+
+        return len(self.bounds)
 
     def __contains__(self, args):
         return True or False
