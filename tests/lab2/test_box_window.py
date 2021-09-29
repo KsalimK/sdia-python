@@ -13,17 +13,17 @@ def test_raise_type_error_when_something_is_called():
 @pytest.mark.parametrize(
     "bounds, expected",
     [
-        (np.array([[2.5, 2.5]]), "BoxWindow: [2.5, 2.5]"),
-        (np.array([[0, 5], [0, 5]]), "BoxWindow: [0, 5] x [0, 5]"),
+        (np.array([[2.5, 2.5]]), "BoxWindow: [2.5 2.5]"),
+        (np.array([[0, 5], [0, 5]]), "BoxWindow: [0 5] x [0 5]"),
         (
             np.array([[0, 5], [-1.45, 3.14], [-10, 10]]),
-            "BoxWindow: [0, 5] x [-1.45, 3.14] x [-10, 10]",
+            "BoxWindow: [0 5] x [-1.45 3.14] x [-10 10]",
         ),
     ],
 )
 def test_box_string_representation(bounds, expected):
-    BoxWindow(bounds)
-    str_repr = BoxWindow.__repr__()
+    A = BoxWindow(bounds)
+    str_repr = BoxWindow.__repr__(A)
     assert str_repr == expected
 
 
@@ -42,7 +42,7 @@ def box_2d_05():
     ],
 )
 def test_indicator_function_box_2d(box_2d_05, point, expected):
-    is_in = box_2d_05.indicator_function(point)
+    is_in = BoxWindow.indicator_function(box_2d_05, point)
     assert is_in == expected
 
 

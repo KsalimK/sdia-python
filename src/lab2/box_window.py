@@ -1,4 +1,5 @@
 from lab2.utils import get_random_number_generator
+import numpy as np
 
 
 class Myclass(object):
@@ -16,8 +17,7 @@ class BoxWindow:
         Args:
             args ([type]): [description]
         """
-        self.bounds = numpy.array(args)
-        self.bounds = None
+        self.bounds = np.array(args)
 
     def __repr__(self):
         r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
@@ -25,24 +25,38 @@ class BoxWindow:
         Returns:
             [type]: [description]
         """
-        return " BoxWindow(" + +")"
+        shape = (self.bounds).shape
+        representation = "BoxWindow: "
+        for i in range(shape[0] - 1):
+            representation = representation + str((self.bounds)[i]) + " x "
+
+        representation = representation + str((self.bounds)[shape[0] - 1])
+        return representation
 
     def __len__(self):
 
         return len(self.bounds)
 
     def __contains__(self, args):
-        return True or False
+        VALUE = True
+        for i in range(len(self.bounds)):
+            if not (self.bounds[i][0] <= args[i] <= self.bounds[i][1]):
+                VALUE = False
+
+        return VALUE
 
     def dimension(self):
         """[summary]
         """
-        return
+        return self.bounds.shape()
 
     def volume(self):
         """[summary]
         """
-        return
+        VALUE = 0
+        for i in range(len(self.bounds)):
+            VALUE += self.bounds[i][0] * self.bounds[i][1]
+        return VALUE
 
     def indicator_function(self, args):
         """[summary]
@@ -50,7 +64,8 @@ class BoxWindow:
         Args:
             args ([type]): [description]
         """
-        return
+
+        return BoxWindow.__contains__(self, args)
 
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
