@@ -8,8 +8,7 @@ class Myclass(object):
 
 
 class BoxWindow:
-    """[summary]
-    """
+    """[summary]"""
 
     def __init__(self, args):
         """[summary]
@@ -19,7 +18,7 @@ class BoxWindow:
         """
         self.bounds = np.array(args)
 
-    def __repr__(self):
+    def __str__(self):
         r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
 
         Returns:
@@ -46,6 +45,7 @@ class BoxWindow:
         return VALUE
 
     def dimension(self):
+<<<<<<< HEAD
         """[summary]
         """
         return self.bounds.shape()
@@ -57,6 +57,14 @@ class BoxWindow:
         for i in range(len(self.bounds)):
             VALUE *= abs(self.bounds[i][0] - self.bounds[i][1])
         return VALUE
+=======
+        """[summary]"""
+        return
+
+    def volume(self):
+        """[summary]"""
+        return
+>>>>>>> b3c697b0cef6e29f9d6feff78d7cc83350a3b846
 
     def indicator_function(self, args):
         """[summary]
@@ -89,7 +97,11 @@ class UnitBoxWindow(BoxWindow):
             dimension ([type]): [description]
             center ([type], optional): [description]. Defaults to None.
         """
+<<<<<<< HEAD
         super(BoxWindow, self).__init__(args)
         for i in range(len(self.bounds)):
             X[i] = get_random_number_generator(rng)
         return X
+=======
+        super(UnitBoxWindow, self).__init__(bounds)
+>>>>>>> b3c697b0cef6e29f9d6feff78d7cc83350a3b846

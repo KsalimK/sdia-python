@@ -7,7 +7,7 @@ from lab2.box_window import BoxWindow
 def test_raise_type_error_when_something_is_called():
     with pytest.raises(TypeError):
         # call_something_that_raises_TypeError()
-        pass
+        raise TypeError()
 
 
 @pytest.mark.parametrize(
@@ -22,9 +22,13 @@ def test_raise_type_error_when_something_is_called():
     ],
 )
 def test_box_string_representation(bounds, expected):
+<<<<<<< HEAD
     A = BoxWindow(bounds)
     str_repr = BoxWindow.__repr__(A)
     assert str_repr == expected
+=======
+    assert str(BoxWindow(bounds)) == expected
+>>>>>>> b3c697b0cef6e29f9d6feff78d7cc83350a3b846
 
 
 @pytest.fixture
