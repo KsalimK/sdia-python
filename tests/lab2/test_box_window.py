@@ -46,6 +46,9 @@ def test_indicator_function_box_2d(box_2d_05, point, expected):
     assert is_in == expected
 
 
+# is_in = box_2d_05.indicator_function(point)
+# for i,x in enumerate(point)
+
 # ================================
 # ==== WRITE YOUR TESTS BELOW ====
 # ================================

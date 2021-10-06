@@ -53,9 +53,9 @@ class BoxWindow:
     def volume(self):
         """[summary]
         """
-        VALUE = 0
+        VALUE = 1
         for i in range(len(self.bounds)):
-            VALUE += self.bounds[i][0] * self.bounds[i][1]
+            VALUE *= abs(self.bounds[i][0] - self.bounds[i][1])
         return VALUE
 
     def indicator_function(self, args):
@@ -67,6 +67,7 @@ class BoxWindow:
 
         return BoxWindow.__contains__(self, args)
 
+    # def rand(self, n=1, rng=None):
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
 
@@ -74,8 +75,10 @@ class BoxWindow:
             n (int, optional): [description]. Defaults to 1.
             rng ([type], optional): [description]. Defaults to None.
         """
-        rng = get_random_number_generator(rng)
-        return
+        X = np.zeros(shape=(n,))
+        for i in range(len(self.bounds)):
+            X[i] = get_random_number_generator(rng)
+        return X
 
 
 class UnitBoxWindow(BoxWindow):
@@ -87,3 +90,6 @@ class UnitBoxWindow(BoxWindow):
             center ([type], optional): [description]. Defaults to None.
         """
         super(BoxWindow, self).__init__(args)
+        for i in range(len(self.bounds)):
+            X[i] = get_random_number_generator(rng)
+        return X
