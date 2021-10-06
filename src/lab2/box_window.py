@@ -221,7 +221,11 @@ class BallWindow:
         Returns:
             [numpy array list]: [the center of the ball]
         """
+<<<<<<< HEAD
         c = np.zeros(self.__len__())
         for i in range(self.__len__()):
             c[i] = np.mean(self.bounds[i])
         return c
+=======
+        super(UnitBoxWindow, self).__init__(bounds)
+>>>>>>> b3c697b0cef6e29f9d6feff78d7cc83350a3b846
