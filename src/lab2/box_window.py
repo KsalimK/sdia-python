@@ -5,21 +5,21 @@ from lab2.utils import get_random_number_generator
 
 # todo clean up the docstrings
 class BoxWindow:
-    """[summary]BoxWindow class representing a virtual n-dimensional bounded Box"""
+    """BoxWindow class representing a virtual n-dimensional bounded Box"""
 
     def __init__(self, args):
-        """[summary]Initialization of Box's parameters
+        """Initialization of Box's parameters
 
         Args:
-            args ([numpy array list]): [this argument represents the bounds of the box]
+            args (array): this argument represents the bounds of the box
         """
         self.bounds = args
 
     def __str__(self):
-        """[summary] BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
+        """ BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
 
         Returns:
-            [str]: [description of the Box's bounds]
+            str: description of the Box's bounds
         """
 
         shape = (self.bounds).shape
@@ -49,21 +49,21 @@ class BoxWindow:
         return representation
 
     def __len__(self):
-        """[summary]
+        """Similar to dimension determination
 
         Returns:
-            [int: [the dimension of the box]
+            int: the dimension of the box
         """
         return ((self.bounds).shape)[0]  # * no need to use ()
 
     def __contains__(self, args):
-        """[summary]This method tests if an element (args) is inside the box
+        """This method tests if an element (args) is inside the box
 
         Args:
-            args ([numpy array list]): [the element to test]
+            args (array): the element to test
 
         Returns:
-            [bool]: [True if the element is inside the box , False if not]
+            bool: True if the element is inside the box , False if not
         """
         # * consider for (a, b), x in zip(self.bounds, point)
         # * or exploit numpy vectorization power
@@ -78,15 +78,13 @@ class BoxWindow:
 
     # todo write tests
     def dimension(self):
-        """[summary]
-        This method is similar to the method __len__ described above
+        """This method is similar to the method __len__ described above
         """
         return self.__len__()  # ? why not using use len(self)
 
     # todo write tests
     def volume(self):
-        """[summary]
-        This method calculates the volume of the Box
+        """This method calculates the volume of the Box
         """
         v = 1
         # * exploit numpy vectors, use - or np.diff, and np.prod
@@ -97,14 +95,13 @@ class BoxWindow:
         return v
 
     def indicator_function(self, args):
-        """[summary]
-        This method is similar to the method  __contains__  described above
+        """This method is similar to the method  __contains__  described above
 
         Args:
-            args ([numpy array list]): [the element to test]
+            args (array): the element to test
 
         Returns:
-            [bool]: [True if the element is inside the box , False if not]
+            bool: True if the element is inside the box , False if not
         """
         # ? isn't it equivalent to return args in self
         if self.__contains__(args):
@@ -113,10 +110,10 @@ class BoxWindow:
             return False
 
     def center(self):
-        """[summary] determinate the center of the box
+        """Determinate the center of the box
 
         Returns:
-            [numpy array list]: [the center of the box]
+            array: the center of the box
         """
         # * Nice try!
         # ? how about np.mean(self.bounds)
@@ -126,12 +123,11 @@ class BoxWindow:
         return c
 
     def rand(self, n=1, rng=None):
-        """[summary]
-        Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
+        """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
 
         Args:
-            n (int, optional): [description]. Defaults to 1.
-            rng ([type], optional): [description]. Defaults to None.
+            n (int, optional):  Defaults to 1.
+            rng (object, optional):  Defaults to None.
 
         Returns:
             Randomly n elements that belong to the box
@@ -151,11 +147,11 @@ class BoxWindow:
 
 class UnitBoxWindow(BoxWindow):
     def __init__(self, center, dimension):
-        """[summary]a subclass of BoxWindow,represents the notion of "unit square box"
+        """a subclass of BoxWindow,represents the notion of "unit square box"
 
         Args:
-            dimension ([int]): [dimension of the Unit Box]
-            center ([numpy array list], optional): [center of the Box].
+            dimension (int): dimension of the Unit Box
+            center (array, optional): center of the Box.
         """
         # * exploit numpy vectors, use - or np.diff, and +
         self.bounds = np.array(
@@ -166,26 +162,26 @@ class UnitBoxWindow(BoxWindow):
 
 # todo write tests
 class BallWindow:
-    """[summary]BoxWindow class representing a virtual n-dimensional bounded Box"""
+    """BoxWindow class representing a virtual n-dimensional bounded Box"""
 
     def __init__(self, center, radius, dimension):
-        """[summary]Initialization of Box's parameters
+        """Initialization of Box's parameters
 
         Args:
-            args ([numpy array list]): [this argument represents the bounds of the box]
+            args (array): this argument represents the bounds of the box
         """
         self.dim = dimension
         self.rad = radius
         self.cent = center
 
     def __contains__(self, args):
-        """[summary]This method tests if an element (args) is inside the ball
+        """This method tests if an element (args) is inside the ball
 
         Args:
-            args ([numpy array list]): [the element to test]
+            args (array): the element to test
 
         Returns:
-            [bool]: [True if the element is inside the ball , False if not]
+            bool: True if the element is inside the ball , False if not
         """
         # * same remarks as in BoxWindow.__contains__
         flag = True
@@ -198,14 +194,12 @@ class BallWindow:
         return flag
 
     def dimension(self):
-        """[summary]
-        This method gives the dimension of the ball
+        """This method gives the dimension of the ball
         """
         return self.dim
 
     def volume(self):
-        r"""[summary]
-        This method calculates the volume of the Ball using the formula :math:` V_{n+1} =\int_{-r}^{r}V_{n}(\sqrt{r^2 -x^2})dx`
+        """[This method calculates the volume of the Ball using the formula :math:` V_{n+1} =\int_{-r}^{r}V_{n}(\sqrt{r^2 -x^2})dx`
         """
         # * iteresting recursive try
         # todo test the method
@@ -218,14 +212,13 @@ class BallWindow:
         return v
 
     def indicator_function(self, args):
-        """[summary]
-        This method is similar to the method  __contains__  described above
+        """This method is similar to the method  __contains__  described above
 
         Args:
-            args ([numpy array list]): [the element to test]
+            args (array): the element to test
 
         Returns:
-            [bool]: [True if the element is inside the ball , False if not]
+            bool: True if the element is inside the ball , False if not
         """
         # ? isn't it equivalent to return args in self
         if self.__contains__(args):
@@ -234,10 +227,10 @@ class BallWindow:
             return False
 
     def center(self):
-        """[summary] determinate the center of the ball
+        """determinate the center of the ball
 
         Returns:
-            [numpy array list]: [the center of the ball]
+            array: [the center of the ball]
         """
         # * interesting try
         # * exploit numpy vectorization power
