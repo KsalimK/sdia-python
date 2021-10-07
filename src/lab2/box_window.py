@@ -19,11 +19,7 @@ class BoxWindow:
         Args:
             args ([numpy array list]): [this argument represents the bounds of the box]
         """
-<<<<<<< HEAD
-        self.bounds = np.array(args)
-=======
         self.bounds = args
->>>>>>> 0c15242accca009adc793de993ed878c78c66c5a
 
     def __str__(self):
         """[summary] BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
@@ -31,27 +27,6 @@ class BoxWindow:
         Returns:
             [str]: [description of the Box's bounds]
         """
-<<<<<<< HEAD
-        shape = (self.bounds).shape
-        representation = "BoxWindow: "
-        for i in range(shape[0] - 1):
-            representation = representation + str((self.bounds)[i]) + " x "
-
-        representation = representation + str((self.bounds)[shape[0] - 1])
-        return representation
-
-    def __len__(self):
-
-        return len(self.bounds)
-
-    def __contains__(self, args):
-        VALUE = True
-        for i in range(len(self.bounds)):
-            if not (self.bounds[i][0] <= args[i] <= self.bounds[i][1]):
-                VALUE = False
-
-        return VALUE
-=======
 
         shape = (self.bounds).shape
         representation = "BoxWindow: "
@@ -89,7 +64,6 @@ class BoxWindow:
 
     def __contains__(self, args):
         """[summary]This method tests if an element (args) is inside the box
->>>>>>> 0c15242accca009adc793de993ed878c78c66c5a
 
         Args:
             args ([numpy array list]): [the element to test]
