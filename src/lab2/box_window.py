@@ -199,7 +199,7 @@ class BallWindow:
         return self.dim
 
     def volume(self):
-        """[This method calculates the volume of the Ball using the formula :math:` V_{n+1} =\int_{-r}^{r}V_{n}(\sqrt{r^2 -x^2})dx`
+        """This method calculates the volume of the Ball using the formula :math:` V_{n+1} =\int_{-r}^{r}V_{n}(\sqrt{r^2 -x^2})dx`
         """
         # * iteresting recursive try
         # todo test the method
