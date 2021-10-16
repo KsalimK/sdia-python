@@ -1,6 +1,6 @@
 import pytest
 
-from lab1.tmp1 import triangle_shape
+from lab1.functions import triangle_shape
 
 triangle_strings = [
     "",

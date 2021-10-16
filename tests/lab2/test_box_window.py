@@ -83,3 +83,18 @@ def all_in(box, n):
 def test_rand_points_in_box(bounds, n, expected):
     box = BoxWindow(bounds)
     assert all_in(box, n) == expected
+
+
+#######################################test volume##############################
+@pytest.mark.parametrize(
+    "bounds, expected",
+    [
+        (np.array([[0, 0]]), 0),
+        (np.array([[2.5, 2.5]]), 0),
+        (np.array([[1, 3], [5, 7]]), 4),
+        (np.array([[1, 3], [5, 7], [10, 20]]), 40),
+    ],
+)
+def test_volume(bounds, expected):
+    box = BoxWindow(bounds)
+    assert np.array_equal(box.volume(), expected)

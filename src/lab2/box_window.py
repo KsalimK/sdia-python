@@ -64,11 +64,11 @@ class BoxWindow:
         #         flag = True
         #     else:
         #         flag = False
+        # return flag  # ? flag is never modified and always returns True
 
         return np.all(
             np.concatenate((args >= self.bounds[:, 0], args <= self.bounds[:, 1]))
         )
-        # return flag  # ? flag is never modified and always returns True
 
     # todo write tests
     def dimension(self):
@@ -80,13 +80,15 @@ class BoxWindow:
     def volume(self):
         """This method calculates the volume of the Box
         """
-        v = 1
-        # * exploit numpy vectors, use - or np.diff, and np.prod
-        for i in range(self.dimension()):
-            # * use *= operator
-            v = v * abs((self.bounds[i][1] - self.bounds[i][0]))
+        # v = 1
+        # # * exploit numpy vectors, use - or np.diff, and np.prod
+        # for i in range(self.dimension()):
+        #     # * use *= operator
+        #     v = v * abs((self.bounds[i][1] - self.bounds[i][0]))
 
-        return v
+        # return v
+
+        return np.prod(abs(self.bounds[:, 1] - self.bounds[:, 0]))
 
     def indicator_function(self, args):
         """This method is similar to the method  __contains__  described above
@@ -97,11 +99,13 @@ class BoxWindow:
         Returns:
             bool: True if the element is inside the box , False if not
         """
-        # ? isn't it equivalent to return args in self
-        if self.__contains__(args):
-            return True
-        else:
-            return False
+        # # ? isn't it equivalent to return args in self
+        # if self.__contains__(args):
+        #     return True
+        # else:
+        #     return False
+
+        return self.__contains__(args)
 
     def center(self):
         """Determinate the center of the box
@@ -111,10 +115,12 @@ class BoxWindow:
         """
         # * Nice try!
         # ? how about np.mean(self.bounds)
-        c = np.zeros(self.__len__())
-        for i in range(self.__len__()):
-            c[i] = np.mean(self.bounds[i])
-        return c
+        # c = np.zeros(self.__len__())
+        # for i in range(self.__len__()):
+        #     c[i] = np.mean(self.bounds[i])
+        # return c
+
+        return np.mean(self.bounds, axis=1)
 
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
@@ -126,17 +132,24 @@ class BoxWindow:
         Returns:
             Randomly n elements that belong to the box
         """
+        # rng = get_random_number_generator(rng)
+        # # ? readability why not using self.dimension()
+        # L = np.ones((n, self.dimension()))  # liste des points
+        # # * exploit numpy, rng.uniform(a, b, size=n)
+        # for i in range(n):
+        #     for j in range(self.dimension):
+        #         x = rng.random()
+
+        #         L[i][j] = (1 - x) * self.bounds[j][0] + x * self.bounds[j][1]
+
+        # return L
         rng = get_random_number_generator(rng)
-        # ? readability why not using self.dimension()
-        L = np.ones((n, self.__len__()))  # liste des points
-        # * exploit numpy, rng.uniform(a, b, size=n)
-        for i in range(n):
-            for j in range(self.__len__()):
-                x = rng.random()
-
-                L[i][j] = (1 - x) * self.bounds[j][0] + x * self.bounds[j][1]
-
-        return L
+        p = rng.uniform(self.bounds[0, 0], self.bounds[0, 1], size=(n, 1))
+        for j in range(1, self.dimension()):
+            p = np.hstack(
+                (p, rng.uniform(self.bounds[j, 0], self.bounds[j, 1], size=(n, 1)))
+            )
+        return p
 
 
 class UnitBoxWindow(BoxWindow):
@@ -148,9 +161,12 @@ class UnitBoxWindow(BoxWindow):
             center (array, optional): center of the Box.
         """
         # * exploit numpy vectors, use - or np.diff, and +
-        self.bounds = np.array(
-            [[center[i] - 0.5, center[i] + 0.5] for i in range(dimension)]
-        )
+        # self.bounds = np.array(
+        #     [[center[i] - 0.5, center[i] + 0.5] for i in range(dimension)]
+        # )
+
+        self.bounds = np.column_stack((center - 0.5, center + 0.5))
+
         super().__init__(self.bounds)  # * Nice call to super
 
 
