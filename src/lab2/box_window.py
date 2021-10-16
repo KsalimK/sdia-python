@@ -27,15 +27,6 @@ class BoxWindow:
         # * consider for a, b in self.bounds
         # ! use f-strings
         for i in range(self.dimension() - 1):  # ? why not self.dimension()
-            # representation = (
-            #     representation
-            #     + "["
-            #     + str((self.bounds)[i][0])
-            #     + ", "
-            #     + str((self.bounds)[i][1])
-            #     + "]"
-            #     + " x "
-            # )
 
             representation = (
                 representation + f"[{(self.bounds)[i][0]}, {(self.bounds)[i][1]}] x "
@@ -46,15 +37,6 @@ class BoxWindow:
             + f"[{(self.bounds)[self.dimension() - 1][0]}, {(self.bounds)[self.dimension() - 1][1]}]"
         )
 
-        # representation = (
-        #     representation
-        #     + "["
-        #     + str((self.bounds)[self.dimension() - 1][0])
-        #     + ", "
-        #     + str((self.bounds)[self.dimension() - 1][1])
-        #     + "]"
-        # )
-
         return representation
 
     def __len__(self):
@@ -63,7 +45,7 @@ class BoxWindow:
         Returns:
             int: the dimension of the box
         """
-        return ((self.bounds).shape)[0]  # * no need to use ()
+        return self.bounds.shape[0]  # * no need to use ()
 
     def __contains__(self, args):
         """This method tests if an element (args) is inside the box
@@ -76,20 +58,23 @@ class BoxWindow:
         """
         # * consider for (a, b), x in zip(self.bounds, point)
         # * or exploit numpy vectorization power
-        flag = True
-        for i in range(self.__len__()):  # ? use len(self) of self.dimension
-            if args[i] >= self.bounds[i][0] and args[i] <= self.bounds[i][1]:
-                flag = True
-            else:
-                return False
+        # flag = True
+        # for i in range(self.dimension()):  # ? use len(self) of self.dimension
+        #     if args[i] >= self.bounds[i][0] and args[i] <= self.bounds[i][1]:
+        #         flag = True
+        #     else:
+        #         flag = False
 
-        return flag  # ? flag is never modified and always returns True
+        return np.all(
+            np.concatenate((args >= self.bounds[:, 0], args <= self.bounds[:, 1]))
+        )
+        # return flag  # ? flag is never modified and always returns True
 
     # todo write tests
     def dimension(self):
         """This method is similar to the method __len__ described above
         """
-        return self.__len__()  # ? why not using use len(self)
+        return len(self)  # ? why not using use len(self)
 
     # todo write tests
     def volume(self):
