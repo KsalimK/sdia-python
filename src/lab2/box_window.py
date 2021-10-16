@@ -22,29 +22,38 @@ class BoxWindow:
             str: description of the Box's bounds
         """
 
-        shape = (self.bounds).shape
+        shape = self.bounds.shape
         representation = "BoxWindow: "
         # * consider for a, b in self.bounds
         # ! use f-strings
-        for i in range(shape[0] - 1):  # ? why not self.dimension()
+        for i in range(self.dimension() - 1):  # ? why not self.dimension()
+            # representation = (
+            #     representation
+            #     + "["
+            #     + str((self.bounds)[i][0])
+            #     + ", "
+            #     + str((self.bounds)[i][1])
+            #     + "]"
+            #     + " x "
+            # )
+
             representation = (
-                representation
-                + "["
-                + str((self.bounds)[i][0])
-                + ", "
-                + str((self.bounds)[i][1])
-                + "]"
-                + " x "
+                representation + f"[{(self.bounds)[i][0]}, {(self.bounds)[i][1]}] x "
             )
 
         representation = (
             representation
-            + "["
-            + str((self.bounds)[shape[0] - 1][0])
-            + ", "
-            + str((self.bounds)[shape[0] - 1][1])
-            + "]"
+            + f"[{(self.bounds)[self.dimension() - 1][0]}, {(self.bounds)[self.dimension() - 1][1]}]"
         )
+
+        # representation = (
+        #     representation
+        #     + "["
+        #     + str((self.bounds)[self.dimension() - 1][0])
+        #     + ", "
+        #     + str((self.bounds)[self.dimension() - 1][1])
+        #     + "]"
+        # )
 
         return representation
 
