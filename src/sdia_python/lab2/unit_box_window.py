@@ -1,6 +1,6 @@
 import numpy as np
 
-from lab2.box_window import BoxWindow
+from sdia_python.lab2.box_window import BoxWindow
 
 
 class UnitBoxWindow(BoxWindow):

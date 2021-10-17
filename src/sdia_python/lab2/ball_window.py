@@ -1,11 +1,12 @@
 import numpy as np
 import scipy.integrate as integrate
 
-from lab2.box_window import BoxWindow
+from sdia_python.lab2.box_window import BoxWindow
 
 
 class BallWindow:
-    """BoxWindow class representing a virtual n-dimensional bounded Box"""
+    """BoxWindow class representing a virtual n-dimensional bounded Box
+    """
 
     def __init__(self, center, radius):
         """Initialization of Box's parameters

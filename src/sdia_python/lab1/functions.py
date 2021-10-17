@@ -1,5 +1,5 @@
 def is_unique(x):
-    """[summary]
+    """tests if there is not 2 same elements in x
 
     Args:
         x (list of int]): [the list to test]
@@ -17,7 +17,7 @@ def is_unique(x):
 
 
 def triangle_shape(height):
-    """[summary]
+    """ draws the the triangle of x
 
     Args:
         height ([int]): [the height of the triangle]

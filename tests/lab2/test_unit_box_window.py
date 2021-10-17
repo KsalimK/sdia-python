@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from lab2.unit_box_window import UnitBoxWindow
+from sdia_python.lab2.unit_box_window import UnitBoxWindow
 
 
 def test_raise_type_error_when_something_is_called():
