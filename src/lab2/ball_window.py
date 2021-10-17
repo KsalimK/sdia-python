@@ -1,7 +1,9 @@
 import numpy as np
 import scipy.integrate as integrate
 
-# todo write tests
+from lab2.box_window import BoxWindow
+
+
 class BallWindow:
     """BoxWindow class representing a virtual n-dimensional bounded Box"""
 
@@ -63,7 +65,3 @@ class BallWindow:
         """
 
         return self.__contains__(args)
-
-
-salim = BallWindow(center=np.array([1, 2]), radius=3)
-salim.volume()
